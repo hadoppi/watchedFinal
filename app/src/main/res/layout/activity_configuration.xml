@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pages.Configuration">
+
+    <TextView
+        android:id="@+id/titleConfiguration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/configuration"
+        app:layout_constraintBottom_toTopOf="@+id/titleLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.032"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.761" />
+
+    <TextView
+        android:id="@+id/titleLogin"
+        android:layout_width="134dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="@string/DisplayLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--        donner la possibilité de choisir l'image-->
+    <ImageView
+        android:id="@+id/imageLogin"
+        android:layout_width="183dp"
+        android:layout_height="214dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/titleConfiguration"
+        app:layout_constraintTop_toBottomOf="@+id/titleLogin"
+        app:srcCompat="@drawable/altered_carbon" />
+
+    <!--Prendre le score timer-->
+
+    <TextView
+        android:id="@+id/titleTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/Timer"
+        app:layout_constraintStart_toEndOf="@+id/imageLogin"
+        app:layout_constraintTop_toBottomOf="@+id/titleLogin" />
+
+    <TextView
+        android:id="@+id/textscoreTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/scoretimer"
+        app:layout_constraintStart_toStartOf="@+id/titleTimer"
+        app:layout_constraintTop_toBottomOf="@+id/titleTimer" />
+
+    <ListView
+        android:id="@+id/listViewFriends"
+        android:layout_width="380dp"
+        android:layout_height="108dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/titleFriends"
+        app:layout_constraintTop_toBottomOf="@+id/titleFriends" />
+
+    <ListView
+        android:id="@+id/listViewFavoriteShow"
+        android:layout_width="380dp"
+        android:layout_height="108dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/titleFavShow"
+        app:layout_constraintTop_toBottomOf="@+id/titleFavShow" />
+
+
+    <TextView
+        android:id="@+id/titleFavShow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/FavoriteShows"
+        app:layout_constraintStart_toStartOf="@+id/imageLogin"
+        app:layout_constraintTop_toBottomOf="@+id/imageLogin" />
+
+    <TextView
+        android:id="@+id/titleFriends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/friends"
+        app:layout_constraintStart_toStartOf="@+id/listViewFavoriteShow"
+        app:layout_constraintTop_toBottomOf="@+id/listViewFavoriteShow" />
+
+<!--Permettre au bouton de changer les infos utilisateurs-->
+    <Button
+        android:id="@+id/buttonConfig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/ButtonConfig"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

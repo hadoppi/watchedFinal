@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pages.MyList">
+
+    <Spinner
+        android:id="@+id/orderBy"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TitleList" />
+
+    <TextView
+        android:id="@+id/TitleList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/myListTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/WatchAlone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/watchAlone"
+        app:layout_constraintStart_toStartOf="@+id/orderBy"
+        app:layout_constraintTop_toBottomOf="@+id/orderBy" />
+
+    <TextView
+        android:id="@+id/WatchWithWife"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/watchWife"
+        app:layout_constraintStart_toStartOf="@+id/WatchAlone"
+        app:layout_constraintTop_toBottomOf="@+id/listViewAlone" />
+
+    <TextView
+        android:id="@+id/WatchWithFamily"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/watchFamily"
+        app:layout_constraintStart_toStartOf="@+id/WatchWithWife"
+        app:layout_constraintTop_toBottomOf="@+id/listViewWife" />
+
+    <ListView
+        android:id="@+id/listViewAlone"
+        android:layout_width="409dp"
+        android:layout_height="171dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/WatchAlone" />
+
+    <ListView
+        android:id="@+id/listViewWife"
+        android:layout_width="409dp"
+        android:layout_height="112dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/WatchWithWife" />
+
+    <ListView
+        android:id="@+id/listViewFamilly"
+        android:layout_width="409dp"
+        android:layout_height="211dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/WatchWithFamily" />
+</androidx.constraintlayout.widget.ConstraintLayout>

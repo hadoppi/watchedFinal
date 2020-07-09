@@ -1,0 +1,248 @@
+Index: app/src/main/java/com/example/watched/database/Movie.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/watched/database/Movie.java	(date 1593998551981)
++++ app/src/main/java/com/example/watched/database/Movie.java	(date 1593998551981)
+@@ -0,0 +1,55 @@
++package com.example.watched.database;
++
++import androidx.annotation.NonNull;
++import androidx.room.ColumnInfo;
++import androidx.room.Entity;
++import androidx.room.PrimaryKey;
++
++import java.util.ArrayList;
++
++@Entity
++public class Movie {
++
++    public Movie(String titleType, String primaryTitle, String originalTitle, boolean isAdult, int startYear, int endYear, int runtimeMinutes, String genres) {
++      
++        this.titleType = titleType;
++        this.primaryTitle = primaryTitle;
++        this.originalTitle = originalTitle;
++        this.isAdult = isAdult;
++        this.startYear = startYear;
++        this.endYear = endYear;
++        this.runtimeMinutes = runtimeMinutes;
++        this.genres = genres;
++    }
++
++    //    alphanumeric unique identifier of the title
++    @PrimaryKey @NonNull
++   public String tconst;
++    //    the type/format of the title (e.g. movie, short, tvseries, tvepisode, video, etc)
++    @ColumnInfo(name="Titre")
++    public  String titleType;
++    //    the more popular title / the title used by the filmmakers on promotional materials at the point of release
++    @ColumnInfo(name="PseudoTitre")
++    public  String primaryTitle;
++    //    original title, in the original language
++    @ColumnInfo(name="Titre original")
++    public   String originalTitle;
++    //    0: non-adult  1: adult
++    @ColumnInfo(name="Film pour adultes ")
++    public  boolean isAdult;
++    //            (YYYY) – represents the release year of a title. In the case of TV Series, it is the series start year
++    @ColumnInfo(name="Date de naissance")
++    public  int startYear;
++    //            (YYYY) – TV Series end year. ‘\N’ for all other title types
++    @ColumnInfo(name="Date de décès")
++    public  int endYear;
++    //    primary runtime of the title, in minutes
++    @ColumnInfo(name="Durée")
++    public   int runtimeMinutes;
++    //    includes up to three genres associated with the title
++    @ColumnInfo(name="Style(s)")
++    public  String genres;
++
++    public Movie(String titleType, String primaryTitle, String originalTitle, boolean isAdult, int startYear, int endYear, int runtimeMinutes, ArrayList<String> genres) {
++    }
++}
+Index: app/src/main/java/com/example/watched/DatabaseInitializer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/watched/DatabaseInitializer.java	(date 1593998631221)
++++ app/src/main/java/com/example/watched/DatabaseInitializer.java	(date 1593998631221)
+@@ -0,0 +1,45 @@
++package com.example.watched;
++
++import android.os.AsyncTask;
++import android.util.Log;
++
++import com.example.watched.database.Movie;
++
++import java.util.ArrayList;
++
++public class DatabaseInitializer {
++    private static final String TAG = "DatabaseInitializer";
++
++    public static void populateDatabase(final AppDatabase db)
++    {
++        Log.i(TAG, ">> Inserting Oppi Smartphone data. WARNING");
++        PopulateDbAsync task = new PopulateDbAsync(db);
++        task.execute();
++    }
++    private static void addMovie(final AppDatabase db, final String titleType, final String primaryTitle, final String originalTitle, final boolean isAdult, final int startYear, final int endYear, final int runtimeMinutes, final ArrayList<String> genres)
++    {
++        Movie movie = new Movie(titleType, primaryTitle, originalTitle, isAdult, startYear, endYear, runtimeMinutes, genres);
++        db.movieDao().insertMovie(movie);
++    }
++    private static class PopulateDbAsync extends AsyncTask<Void, Void, Void>
++    {
++        private final AppDatabase database;
++
++        PopulateDbAsync(AppDatabase db)
++        {
++            database = db;
++        }
++
++        @Override
++        protected Void doInBackground(final Void... params)
++        {
++            populateWithTestData(database);
++            return null;
++        }
++    }
++    private static void populateWithTestData(AppDatabase db) {
++        db.movieDao().deleteAll();
++        addMovie(db, "test", "test", "test", false, 2009, 2010, 200, new ArrayList<String>());
++    }
++
++}
+Index: app/src/main/java/com/example/watched/DAO/MovieDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/watched/DAO/MovieDao.java	(date 1593998261509)
++++ app/src/main/java/com/example/watched/DAO/MovieDao.java	(date 1593998261509)
+@@ -0,0 +1,22 @@
++package com.example.watched.DAO;
++
++import androidx.room.Dao;
++import androidx.room.Insert;
++import androidx.room.OnConflictStrategy;
++import androidx.room.Query;
++
++import com.example.watched.database.Movie;
++
++import java.util.List;
++
++@Dao
++public interface MovieDao {
++    @Query("SELECT * from movie Where tconst= :id ")
++    Movie findById(String id);
++    @Query("SELECT * from movie Where `Date de naissance`< :annee AND `Date de décès`> :annee ORDER by `Titre original`" )
++    List<Movie> findByYear(int annee);
++    @Query("DELETE FROM movie")
++    void deleteAll();
++    @Insert(onConflict = OnConflictStrategy.REPLACE)
++    void insertMovie(Movie m);
++}
+Index: app/src/main/java/com/example/watched/AppDatabase.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/watched/AppDatabase.java	(date 1593998987643)
++++ app/src/main/java/com/example/watched/AppDatabase.java	(date 1593998987643)
+@@ -0,0 +1,93 @@
++package com.example.watched;
++
++import android.content.Context;
++import android.util.Log;
++
++import androidx.annotation.NonNull;
++import androidx.lifecycle.LiveData;
++import androidx.lifecycle.MutableLiveData;
++import androidx.room.Database;
++import androidx.room.Room;
++import androidx.room.RoomDatabase;
++import androidx.sqlite.db.SupportSQLiteDatabase;
++
++import com.example.watched.DAO.MovieDao;
++import com.example.watched.database.Movie;
++
++import java.io.File;
++import java.util.concurrent.Executors;
++
++@Database(entities = {Movie.class}, version = 1, exportSchema = false)
++public abstract class AppDatabase extends RoomDatabase   {
++    private static final String TAG = "AppDatabaseOppi";
++    private static final String DATABASE_NAME = "db_library_oppi";
++
++    private final MutableLiveData<Boolean> isDatabaseCreated = new MutableLiveData<>();
++
++    private static AppDatabase INSTANCE;
++    private static final Object LOCK = new Object();
++
++    public abstract MovieDao movieDao();
++
++
++    public synchronized static AppDatabase getAppDatabase(Context context)
++    {
++        if(INSTANCE == null)
++        {
++            synchronized (LOCK)
++            {
++                if(INSTANCE == null)
++                {
++                    INSTANCE = buildDatabase(context.getApplicationContext());
++                    INSTANCE.updateDatabaseCreated(context.getApplicationContext());
++                }
++            }
++        }
++        return INSTANCE;
++    }
++
++    private static AppDatabase buildDatabase(final Context appContext)
++    {
++        Log.i(TAG, "Database will be initialized.");
++        return Room.databaseBuilder(appContext, AppDatabase.class, DATABASE_NAME)
++                .addCallback(new Callback()
++                {
++                    @Override
++                    public void onCreate(@NonNull SupportSQLiteDatabase db)
++                    {
++                        super.onCreate(db);
++                        Executors.newSingleThreadExecutor().execute(() -> {
++                            AppDatabase database = AppDatabase.getAppDatabase(appContext);
++                            DatabaseInitializer.populateDatabase(database);
++                            // notify that the database was created and it's ready to be used
++                            database.setDatabaseCreated();
++                        });
++                    }
++                }).build();
++    }
++    private void updateDatabaseCreated(final Context context) {
++        if (context.getDatabasePath(DATABASE_NAME).exists()) {
++            Log.i(TAG, "Database initialized.");
++            setDatabaseCreated();
++        }
++    }
++    private void setDatabaseCreated(){
++        isDatabaseCreated.postValue(true);
++    }
++    public LiveData<Boolean> getDatabaseCreated() {
++        return isDatabaseCreated;
++    }
++    public static void initializeDemoData(final AppDatabase database)
++    {
++        Executors.newSingleThreadExecutor().execute(() ->
++        {
++            database.runInTransaction(() -> {
++                Log.i(TAG, "Wipe database.");
++                database.movieDao().deleteAll();
++                database.clearAllTables();
++
++                DatabaseInitializer.populateDatabase(database);
++            });
++        });
++    }
++}
+\ No newline at end of file

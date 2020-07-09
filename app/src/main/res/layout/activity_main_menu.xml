@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.MainActivity">
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="327dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:text="oppi"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/circle_button2"
+        android:layout_width="112dp"
+        android:layout_height="108dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_discover"
+        android:text="@string/Discover"
+        android:shape="oval"
+        app:layout_constraintStart_toStartOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
+
+    <Button
+        android:id="@+id/circle_button4"
+        android:layout_width="112dp"
+        android:layout_height="108dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/test"
+        android:text="@string/Timer"
+        app:layout_constraintStart_toStartOf="@+id/circle_button2"
+        app:layout_constraintTop_toBottomOf="@+id/circle_button6" />
+
+    <Button
+        android:id="@+id/circle_button6"
+        android:layout_width="112dp"
+        android:layout_height="108dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/shape_drawable"
+        android:text="@string/Messages"
+        app:layout_constraintStart_toStartOf="@+id/circle_button2"
+        app:layout_constraintTop_toBottomOf="@+id/circle_button2" />
+
+    <Button
+        android:id="@+id/circle_button"
+        android:layout_width="112dp"
+        android:layout_height="108dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/shape_drawable"
+        android:text="@string/MyList"
+        app:layout_constraintEnd_toEndOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
+
+    <Button
+        android:id="@+id/circle_button5"
+        android:layout_width="112dp"
+        android:layout_height="108dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/shape_drawable"
+        android:text="@string/Configuration"
+        app:layout_constraintEnd_toEndOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/circle_button7" />
+
+    <Button
+        android:id="@+id/circle_button7"
+        android:layout_width="112dp"
+        android:layout_height="108dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/shape_drawable"
+        android:text="@string/Friends"
+        app:layout_constraintEnd_toEndOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/circle_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
