@@ -1,4 +1,4 @@
-package com.example.watched.viewmodel.account;
+package com.example.watched.viewmodel.tvShow;
 
 import android.app.Application;
 import android.content.Context;
@@ -12,23 +12,20 @@ import androidx.annotation.NonNull;
 
 import java.util.List;
 
-import com.example.watched.BaseApp;
-import com.example.watched.database.entity.AccountEntity;
-import com.example.watched.database.pojo.TvShowWithEpisodes;
-import com.example.watched.database.repository.AccountRepository;
-import com.example.watched.database.repository.ClientRepository;
+import com.example.watched.database.entity.TvShowEntity;
+import com.example.watched.database.repository.TvShowRepository;
 import com.example.watched.util.OnAsyncEventListener;
 
-public class AccountListViewModel extends AndroidViewModel {
+public class TvShowListViewModel extends AndroidViewModel {
 
     private Context applicationContext;
     private Application application;
-    private AccountRepository repository;
-    private final MediatorLiveData<List<AccountEntity>> observableShow;
-    private final MediatorLiveData<List<AccountEntity>> observableShowId;
+    private TvShowRepository repository;
+    private final MediatorLiveData<List<TvShowEntity>> observableShow;
+    private final MediatorLiveData<List<TvShowEntity>> observableShowId;
 
-    public AccountListViewModel(@NonNull Application application,
-                                AccountRepository accountRepository) {
+    public TvShowListViewModel(@NonNull Application application,
+                               TvShowRepository accountRepository) {
         super(application);
 
         applicationContext = application.getApplicationContext();
@@ -40,11 +37,12 @@ public class AccountListViewModel extends AndroidViewModel {
         observableShow.setValue(null);
         observableShowId.setValue(null);
 
-        LiveData<List<AccountEntity>> tvShows = repository.getAccounts(applicationContext);
+        LiveData<List<TvShowEntity>> tvShows = repository.getAccounts(applicationContext);
 //        LiveData<List<TvShowWithEpisodes>> tvshowsIDId = repository.getAccounts(applicationContext);
 
         // observe the changes of the entities from the database and forward them
         observableShow.addSource(tvShows, observableShow::setValue);
+
 //        observableShowId.addSource(tvShowsID, observableShowId::setValue);
     }
 
@@ -55,17 +53,17 @@ public class AccountListViewModel extends AndroidViewModel {
 
         @NonNull
         private final Application application;
-        private final AccountRepository accountRepository;
+        private final TvShowRepository accountRepository;
 
         public Factory(@NonNull Application application ){
             this.application = application;
-            accountRepository = AccountRepository.getInstance();
+            accountRepository = TvShowRepository.getInstance();
         }
 
         @Override
         public <T extends ViewModel> T create(Class<T> modelClass) {
             //noinspection unchecked
-            return (T) new AccountListViewModel(application, accountRepository);
+            return (T) new TvShowListViewModel(application, accountRepository);
         }
     }
 
@@ -73,11 +71,11 @@ public class AccountListViewModel extends AndroidViewModel {
     /**
      * Expose the LiveData AccountEntities query so the UI can observe it.
      */
-    public LiveData<List<AccountEntity>> getAccounts() {
+    public LiveData<List<TvShowEntity>> getAccounts() {
         return observableShow;
     }
 
-    public void deleteAccount(AccountEntity account, OnAsyncEventListener callback) {
+    public void deleteAccount(TvShowEntity account, OnAsyncEventListener callback) {
         repository.delete(account, callback, application);
     }
 

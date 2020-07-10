@@ -1,4 +1,4 @@
-package com.example.watched.viewmodel.account;
+package com.example.watched.viewmodel.tvShow;
 
 import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
@@ -9,32 +9,32 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.annotation.NonNull;
 
 import com.example.watched.BaseApp;
-import com.example.watched.database.entity.AccountEntity;
-import com.example.watched.database.repository.AccountRepository;
+import com.example.watched.database.entity.TvShowEntity;
+import com.example.watched.database.repository.TvShowRepository;
 import com.example.watched.util.OnAsyncEventListener;
 
-public class AccountViewModel  extends AndroidViewModel {
+public class TvShowViewModel extends AndroidViewModel {
 
     private Application application;
 
-    private AccountRepository repository;
+    private TvShowRepository repository;
 
     // MediatorLiveData can observe other LiveData objects and react on their emissions.
-    private final MediatorLiveData<AccountEntity> observableAccount;
+    private final MediatorLiveData<TvShowEntity> observableAccount;
 
-    public AccountViewModel(@NonNull Application application,
-                                   final String name, AccountRepository accountRepository) {
+    public TvShowViewModel(@NonNull Application application,
+                           final String name, TvShowRepository tvShowRepository) {
         super(application);
 
         this.application = application;
 
-        repository = accountRepository;
+        repository = tvShowRepository;
 
         observableAccount = new MediatorLiveData<>();
         // set by default null, until we get data from the database.
         observableAccount.setValue(null);
 
-        LiveData<AccountEntity> account = repository.getAccount(name, application);
+        LiveData<TvShowEntity> account = repository.getAccount(name, application);
 
         // observe the changes of the account entity from the database and forward them
         observableAccount.addSource(account, observableAccount::setValue);
@@ -50,33 +50,33 @@ public class AccountViewModel  extends AndroidViewModel {
 
         private final String name;
 
-        private final AccountRepository repository;
+        private final TvShowRepository repository;
 
         public Factory(@NonNull Application application, String name) {
             this.application = application;
             this.name = name;
-            repository = ((BaseApp) application).getAccountRepository();
+            repository = ((BaseApp) application).getTvShowRepository();
         }
 
         @Override
         public <T extends ViewModel> T create(Class<T> modelClass) {
             //noinspection unchecked
-            return (T) new AccountViewModel(application, name, repository);
+            return (T) new TvShowViewModel(application, name, repository);
         }
     }
 
     /**
      * Expose the LiveData AccountEntity query so the UI can observe it.
      */
-    public LiveData<AccountEntity> getAccount() {
+    public LiveData<TvShowEntity> getTvShow() {
         return observableAccount;
     }
 
-    public void createAccount(AccountEntity account, OnAsyncEventListener callback) {
-        repository.insert(account, callback, application);
+    public void createTvShow(TvShowEntity tvShow, OnAsyncEventListener callback) {
+        repository.insert(tvShow, callback, application);
     }
 
-    public void updateAccount(AccountEntity account, OnAsyncEventListener callback) {
-        repository.update(account, callback, application);
+    public void updateTvShow(TvShowEntity tvShow, OnAsyncEventListener callback) {
+        repository.update(tvShow, callback, application);
     }
 }

@@ -1,6 +1,5 @@
 package com.example.watched.ui;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,9 +11,9 @@ import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.watched.R;
-import com.example.watched.ui.account.AccountsActivity;
+import com.example.watched.ui.tvShow.TvShowsActivity;
 
-public class MainActivity<Textview> extends BaseActivity {
+public class MainActivity extends BaseActivity {
     Button buttonDiscover;
     Button buttonMessages;
     Button buttonFriends;
@@ -34,42 +33,42 @@ public class MainActivity<Textview> extends BaseActivity {
         String user = settings.getString(BaseActivity.PREFS_USER, null);
 
 
-        buttonDiscover = (Button) findViewById(R.id.circle_button2);
+        buttonDiscover = findViewById(R.id.circle_button2);
         buttonDiscover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openDiscover();
             }
         });
-        buttonConfiguration = (Button) findViewById(R.id.circle_button5);
+        buttonConfiguration = findViewById(R.id.circle_button5);
         buttonConfiguration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openConfiguration();
             }
         });
-        buttonMessages = (Button) findViewById(R.id.circle_button6);
+        buttonMessages = findViewById(R.id.circle_button6);
         buttonMessages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openMessages();
             }
         });
-        buttonMyList = (Button) findViewById(R.id.circle_button);
+        buttonMyList = findViewById(R.id.circle_button);
         buttonMyList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openMyList();
             }
         });
-        buttonFriends = (Button) findViewById(R.id.circle_button7);
+        buttonFriends = findViewById(R.id.circle_button7);
         buttonFriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openFriends();
             }
         });
-        buttonTimer = (Button) findViewById(R.id.circle_button4);
+        buttonTimer = findViewById(R.id.circle_button4);
         buttonTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +78,7 @@ public class MainActivity<Textview> extends BaseActivity {
 
     }
     public void openDiscover(){
-        Intent intent = new Intent(this, AccountsActivity.class);
+        Intent intent = new Intent(this, TvShowsActivity.class);
         startActivity(intent);
     }
     public void openMessages(){

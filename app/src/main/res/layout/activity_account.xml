@@ -6,7 +6,7 @@
     android:layout_marginRight="16dp"
     android:layout_marginTop="16dp"
     android:orientation="vertical"
-    tools:context="com.example.watched.ui.account.AccountDetailActivity">
+    tools:context="com.example.watched.ui.tvShow.AccountDetailActivity">
 
     <TextView
         android:id="@+id/accBalanceTitle"

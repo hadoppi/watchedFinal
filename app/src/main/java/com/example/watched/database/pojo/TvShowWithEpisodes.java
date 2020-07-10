@@ -3,8 +3,7 @@ package com.example.watched.database.pojo;
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
-import com.example.watched.database.entity.AccountEntity;
-import com.example.watched.database.entity.ClientEntity;
+import com.example.watched.database.entity.TvShowEntity;
 import com.example.watched.database.entity.EpisodeEntity;
 
 import java.util.List;
@@ -17,5 +16,5 @@ public class TvShowWithEpisodes {
     public EpisodeEntity episode;
 
     @Relation(parentColumn = "name", entityColumn = "TvShow", entity = EpisodeEntity.class)
-    public List<AccountEntity> accounts;
+    public List<TvShowEntity> accounts;
 }

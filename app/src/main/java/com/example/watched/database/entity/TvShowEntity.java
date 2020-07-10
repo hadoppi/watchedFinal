@@ -6,14 +6,14 @@ import androidx.room.PrimaryKey;
 
 
 @Entity(tableName = "Show")
-public class AccountEntity {
+public class TvShowEntity {
     @PrimaryKey @NonNull
     private String name;
 
-    public AccountEntity() {
+    public TvShowEntity() {
     }
 
-    public AccountEntity(String name) {
+    public TvShowEntity(String name) {
         this.name = name;
     }
 
@@ -30,8 +30,8 @@ public class AccountEntity {
     public boolean equals(Object obj) {
         if (obj == null) return false;
         if (obj == this) return true;
-        if (!(obj instanceof AccountEntity)) return false;
-        AccountEntity o = (AccountEntity) obj;
+        if (!(obj instanceof TvShowEntity)) return false;
+        TvShowEntity o = (TvShowEntity) obj;
         return o.getName().equals(this.getName());
     }
 
@@ -39,4 +39,6 @@ public class AccountEntity {
     public String toString() {
         return name;
     }
+
+
 }

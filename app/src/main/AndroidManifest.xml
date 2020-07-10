@@ -32,7 +32,7 @@
         </activity>
         <!--        TV SHOWS activity-->
         <activity
-            android:name=".ui.account.AccountsActivity"
+            android:name=".ui.tvShow.TvShowsActivity"
             android:label="@string/title_activity_accounts"
             android:parentActivityName=".ui.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -42,22 +42,22 @@
         </activity>
         <!--        episode activity-->
         <activity
-            android:name=".ui.account.EpisodesActivity"
-            android:parentActivityName=".ui.account.AccountsActivity"
+            android:name=".ui.tvShow.EpisodesActivity"
+            android:parentActivityName=".ui.tvShow.TvShowsActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.watched.ui.account.EpisodeDetailActivity" />
+                android:value="com.example.watched.ui.tvShow.TvShowsActivity" />
 
         </activity>
         <!--        episode details activity-->
         <activity
-            android:name=".ui.account.EpisodeDetailActivity"
-            android:parentActivityName=".ui.account.EpisodesActivity"
+            android:name=".ui.tvShow.EpisodeDetailActivity"
+            android:parentActivityName=".ui.tvShow.EpisodesActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.watched.ui.account.EpisodeDetailActivity" />
+                android:value="com.example.watched.ui.tvShow.EpisodesActivity" />
         </activity>
         <!--                <activity-->
         <!--                    android:name=".ui.mgmt.SettingsActivity"-->
@@ -87,23 +87,17 @@
 
 
         <activity
-            android:name=".ui.account.EditAccountActivity"
+            android:name=".ui.tvShow.EditAccountActivity"
             android:label="@string/title_activity_edit_account"
-            android:parentActivityName=".ui.account.AccountsActivity"
+            android:parentActivityName=".ui.tvShow.TvShowsActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.watched.ui.account.AccountsActivity" />
+                android:value="com.example.watched.ui.tvShow.TvShowsActivity" />
         </activity>
+        <activity android:name=".ui.mgmt.SettingsActivity" />
 
-        <activity
-            android:name=".ui.account.AccountDetailActivity"
-            android:parentActivityName=".ui.account.AccountsActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.watched.ui.account.AccountsActivity" />
-        </activity>
+
     </application>
 
 </manifest>

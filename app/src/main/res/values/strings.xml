@@ -94,9 +94,12 @@
     <string name="action_register">Register</string>
     <string name="action_demo_data">Reset Demo Data</string>
     <string name="demo_data_initiated">Demo data initiated</string>
-    <string name="title_activity_Episodes">Episodes</string>
+    <string name="title_activity_Episodes">Série</string>
     <string name="title_activity_tvShow">TvShows</string>
     <string name="title_activity_episode_detail">detail episode</string>
+    <string name="Episode">nom de l\'épisode</string>
+    <string name="title_activity_Episode">Episode</string>
+    <string name="title_activity_settings">settings</string>
 
 
 </resources>

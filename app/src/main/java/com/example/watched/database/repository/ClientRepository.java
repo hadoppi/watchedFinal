@@ -3,8 +3,6 @@ package com.example.watched.database.repository;
 import android.app.Application;
 import androidx.lifecycle.LiveData;
 
-import java.util.List;
-
 import com.example.watched.BaseApp;
 import com.example.watched.database.async.client.CreateClient;
 import com.example.watched.database.async.client.DeleteClient;
@@ -21,7 +19,7 @@ public class ClientRepository {
 
     public static ClientRepository getInstance() {
         if (instance == null) {
-            synchronized (AccountRepository.class) {
+            synchronized (TvShowRepository.class) {
                 if (instance == null) {
                     instance = new ClientRepository();
                 }

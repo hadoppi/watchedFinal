@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.example.watched.R;
-import com.example.watched.database.entity.AccountEntity;
+import com.example.watched.database.entity.TvShowEntity;
 import com.example.watched.database.entity.ClientEntity;
 import com.example.watched.database.entity.EpisodeEntity;
 import com.example.watched.util.RecyclerViewItemClickListener;
@@ -52,8 +52,8 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         T item = mData.get(position);
-        if (item.getClass().equals(AccountEntity.class))
-            holder.mTextView.setText(((AccountEntity) item).getName());
+        if (item.getClass().equals(TvShowEntity.class))
+            holder.mTextView.setText(((TvShowEntity) item).getName());
         if (item.getClass().equals(ClientEntity.class))
             holder.mTextView.setText(((ClientEntity) item).getFirstName() + " " + ((ClientEntity) item).getLastName());
         if (item.getClass().equals(EpisodeEntity.class))
@@ -87,8 +87,8 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
 
                 @Override
                 public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-                    if (mData instanceof AccountEntity) {
-                        return ((AccountEntity) mData.get(oldItemPosition)).getName().equals(((AccountEntity) data.get(newItemPosition)).getName());
+                    if (mData instanceof TvShowEntity) {
+                        return ((TvShowEntity) mData.get(oldItemPosition)).getName().equals(((TvShowEntity) data.get(newItemPosition)).getName());
                     }
                     if (mData instanceof ClientEntity) {
                         return ((ClientEntity) mData.get(oldItemPosition)).getEmail().equals(
@@ -99,9 +99,9 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
 
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    if (mData instanceof AccountEntity) {
-                        AccountEntity newAccount = (AccountEntity) data.get(newItemPosition);
-                        AccountEntity oldAccount = (AccountEntity) mData.get(newItemPosition);
+                    if (mData instanceof TvShowEntity) {
+                        TvShowEntity newAccount = (TvShowEntity) data.get(newItemPosition);
+                        TvShowEntity oldAccount = (TvShowEntity) mData.get(newItemPosition);
                         return newAccount.getName().equals(oldAccount.getName())
                                 && Objects.equals(newAccount.getName(), oldAccount.getName());
                     }

@@ -15,9 +15,11 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.example.watched.R;
-import com.example.watched.ui.account.AccountsActivity;
+import com.example.watched.ui.tvShow.TvShowsActivity;
 import com.example.watched.ui.client.ClientActivity;
 import com.example.watched.ui.mgmt.LoginActivity;
+
+import java.util.Objects;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -44,6 +46,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_base);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         frameLayout = findViewById(R.id.flContent);
 
@@ -108,8 +111,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_client) {
             intent = new Intent(this, ClientActivity.class);
-        } else if (id == R.id.nav_accounts) {
-            intent = new Intent(this, AccountsActivity.class);
+        } else if (id == R.id.nav_tvShow) {
+            intent = new Intent(this, TvShowsActivity.class);
         } else if (id == R.id.nav_logout) {
             logout();
         }
@@ -119,7 +122,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             );
             startActivity(intent);
         }
-        drawerLayout.closeDrawer(GravityCompat.START); 
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 

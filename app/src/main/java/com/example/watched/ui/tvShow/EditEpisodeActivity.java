@@ -1,6 +1,5 @@
-package com.example.watched.ui.account;
+package com.example.watched.ui.tvShow;
 
-import androidx.lifecycle.ViewModelProviders;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,23 +7,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.lifecycle.ViewModelProviders;
+
 import com.example.watched.R;
-import com.example.watched.database.entity.AccountEntity;
+import com.example.watched.database.entity.TvShowEntity;
 import com.example.watched.ui.BaseActivity;
 import com.example.watched.util.OnAsyncEventListener;
-import com.example.watched.viewmodel.account.AccountViewModel;
+import com.example.watched.viewmodel.tvShow.TvShowViewModel;
 
-public class EditAccountActivity extends BaseActivity {
+public class EditEpisodeActivity extends BaseActivity {
 
     private static final String TAG = "EditAccountActivity";
 
-    private AccountEntity account;
+    private TvShowEntity account;
     private String owner;
     private boolean isEditMode;
     private Toast toast;
     private EditText etAccountName;
 
-    private AccountViewModel viewModel;
+    private TvShowViewModel viewModel;
 
 
     @Override
@@ -58,11 +59,11 @@ public class EditAccountActivity extends BaseActivity {
             isEditMode = true;
         }
 
-        AccountViewModel.Factory factory = new AccountViewModel.Factory(
+        TvShowViewModel.Factory factory = new TvShowViewModel.Factory(
                 getApplication(), name);
-        viewModel = ViewModelProviders.of(this, factory).get(AccountViewModel.class);
+        viewModel = ViewModelProviders.of(this, factory).get(TvShowViewModel.class);
         if (isEditMode) {
-            viewModel.getAccount().observe(this, accountEntity -> {
+            viewModel.getTvShow().observe(this, accountEntity -> {
                 if (accountEntity != null) {
                     account = accountEntity;
                     etAccountName.setText(account.getName());
@@ -75,7 +76,7 @@ public class EditAccountActivity extends BaseActivity {
         if (isEditMode) {
             if(!"".equals(accountName)) {
                 account.setName(accountName);
-                viewModel.updateAccount(account, new OnAsyncEventListener() {
+                viewModel.updateTvShow(account, new OnAsyncEventListener() {
                     @Override
                     public void onSuccess() {
                         Log.d(TAG, "updateAccount: success");
@@ -88,10 +89,9 @@ public class EditAccountActivity extends BaseActivity {
                 });
             }
         } else {
-            AccountEntity newAccount = new AccountEntity();
-
+            TvShowEntity newAccount = new TvShowEntity();
             newAccount.setName(accountName);
-            viewModel.createAccount(newAccount, new OnAsyncEventListener() {
+            viewModel.createTvShow(newAccount, new OnAsyncEventListener() {
                 @Override
                 public void onSuccess() {
                     Log.d(TAG, "createAccount: success");

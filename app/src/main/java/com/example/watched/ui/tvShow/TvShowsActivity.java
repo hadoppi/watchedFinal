@@ -1,56 +1,56 @@
-package com.example.watched.ui.account;
+package com.example.watched.ui.tvShow;
 
-import android.content.DialogInterface;
+import androidx.lifecycle.ViewModelProviders;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.core.view.GravityCompat;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.watched.R;
-import com.example.watched.adapter.RecyclerAdapter;
-import com.example.watched.database.entity.AccountEntity;
-import com.example.watched.ui.BaseActivity;
-import com.example.watched.ui.MainActivity;
-import com.example.watched.util.OnAsyncEventListener;
-import com.example.watched.util.RecyclerViewItemClickListener;
-import com.example.watched.viewmodel.account.AccountListViewModel;
-import com.example.watched.viewmodel.account.AccountViewModel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-public class EpisodeDetailActivity extends BaseActivity {
+import com.example.watched.R;
+import com.example.watched.adapter.RecyclerAdapter;
+import com.example.watched.database.entity.TvShowEntity;
+import com.example.watched.ui.BaseActivity;
+import com.example.watched.util.OnAsyncEventListener;
+import com.example.watched.util.RecyclerViewItemClickListener;
+import com.example.watched.viewmodel.tvShow.TvShowListViewModel;
 
-    private static final String TAG = "Episode";
+public class TvShowsActivity extends BaseActivity {
 
-    private List<AccountEntity> tvShows;
-    private RecyclerAdapter<AccountEntity> adapter;
-    private AccountListViewModel viewModel;
+    private static final String TAG = "TVShowsActivity";
+
+    private List<TvShowEntity> tvShows;
+    private RecyclerAdapter<TvShowEntity> adapter;
+    private TvShowListViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_accounts, frameLayout);
 
-        setTitle(getString(R.string.title_activity_episode_detail));
+        setTitle(getString(R.string.title_activity_tvShow));
         navigationView.setCheckedItem(position);
 
         RecyclerView recyclerView = findViewById(R.id.accountsRecyclerView);
@@ -74,12 +74,9 @@ public class EpisodeDetailActivity extends BaseActivity {
                 Log.d(TAG, "clicked position:" + position);
                 Log.d(TAG, "clicked on: " + tvShows.get(position).getName());
 
-                Intent intent = new Intent(EpisodeDetailActivity.this, MainActivity.class);
-//                intent.setFlags(
-//                        Intent.FLAG_ACTIVITY_NO_ANIMATION |
-//                        Intent.FLAG_ACTIVITY_NO_HISTORY
-//                );
-//                intent.putExtra("accountId", accounts.get(position).getId());
+                Intent intent = new Intent(TvShowsActivity.this, EpisodesActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.putExtra("tvShow", tvShows.get(position).getName());
                 startActivity(intent);
             }
 
@@ -94,7 +91,7 @@ public class EpisodeDetailActivity extends BaseActivity {
 
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(view -> {
-                    Intent intent = new Intent(EpisodeDetailActivity.this, EditAccountActivity.class);
+                    Intent intent = new Intent(TvShowsActivity.this, EditAccountActivity.class);
                     intent.setFlags(
                             Intent.FLAG_ACTIVITY_NO_ANIMATION |
                                     Intent.FLAG_ACTIVITY_NO_HISTORY
@@ -103,18 +100,19 @@ public class EpisodeDetailActivity extends BaseActivity {
                 }
         );
 
-//        AccountListViewModel.Factory factory = new AccountListViewModel.Factory(
-//                getApplication());
-//        viewModel = ViewModelProviders.of(this, factory).get(AccountListViewModel.class);
-//        viewModel.getOwnAccounts().observe(this, accountEntities -> {
-//            if (accountEntities != null) {
-//                tvShows = accountEntities;
-//                adapter.setData(tvShows);
-//            }
-//        });
+        TvShowListViewModel.Factory factory = new TvShowListViewModel.Factory(getApplication());
+        viewModel = ViewModelProviders.of(this, factory).get(TvShowListViewModel.class);
+        viewModel.getAccounts().observe(this, tvShows -> {
 
+            if (tvShows != null) {
+                this.tvShows = tvShows;
+
+                adapter.setData(this.tvShows);
+            }
+        });
         recyclerView.setAdapter(adapter);
     }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -130,7 +128,7 @@ public class EpisodeDetailActivity extends BaseActivity {
     }
 
     private void createDeleteDialog(final int position) {
-        final AccountEntity account = tvShows.get(position);
+        final TvShowEntity account = tvShows.get(position);
         LayoutInflater inflater = LayoutInflater.from(this);
         final View view = inflater.inflate(R.layout.row_delete_item, null);
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();

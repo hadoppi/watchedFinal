@@ -22,8 +22,8 @@ import java.util.List;
 @Dao
 public interface EpisodeDao {
 
-    @Query("SELECT * FROM Episodes WHERE name = :id")
-    LiveData<EpisodeEntity> getById(String id);
+    @Query("SELECT * FROM Episodes WHERE id = :id")
+    LiveData<EpisodeEntity> getById(Long id);
 
     @Query("SELECT * FROM Episodes")
     LiveData<List<EpisodeEntity>> getAll();

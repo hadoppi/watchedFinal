@@ -33,7 +33,7 @@ public class EpisodeRepository {
         return instance;
     }
 
-    public LiveData<EpisodeEntity> getEpisode(final String EpisodeId, Application application) {
+    public LiveData<EpisodeEntity> getEpisode(final Long EpisodeId, Application application) {
         return ((BaseApp) application).getDatabase().episodeDao().getById(EpisodeId);
     }
 

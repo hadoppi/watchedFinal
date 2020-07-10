@@ -1,31 +1,31 @@
-package com.example.watched.database.async.account;
+package com.example.watched.database.async.list;
 
 import android.app.Application;
 import android.os.AsyncTask;
 
 import com.example.watched.BaseApp;
-import com.example.watched.database.entity.AccountEntity;
+import com.example.watched.database.entity.ListEntity;
 import com.example.watched.util.OnAsyncEventListener;
 
-public class DeleteAccount extends AsyncTask<AccountEntity, Void, Void> {
+public class UpdateList extends AsyncTask<ListEntity, Void, Void> {
 
     private Application application;
     private OnAsyncEventListener callback;
     private Exception exception;
 
-    public DeleteAccount(Application application, OnAsyncEventListener callback) {
+    public UpdateList(Application application, OnAsyncEventListener callback) {
         this.application = application;
         this.callback = callback;
     }
 
     @Override
-    protected Void doInBackground(AccountEntity... params) {
+    protected Void doInBackground(ListEntity... params) {
         try {
-            for (AccountEntity account : params)
-                ((BaseApp) application).getDatabase().accountDao()
-                        .delete(account);
+            for (ListEntity list : params)
+                ((BaseApp) application).getDatabase().listDao()
+                        .update(list);
         } catch (Exception e) {
-            exception = e;
+            this.exception = e;
         }
         return null;
     }

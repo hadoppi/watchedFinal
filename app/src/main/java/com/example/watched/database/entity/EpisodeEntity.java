@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "Episodes",
         foreignKeys =
         @ForeignKey(
-                entity =AccountEntity.class,
+                entity = TvShowEntity.class,
                 parentColumns = "name",
                 childColumns = "TvShow",
                 onDelete = ForeignKey.CASCADE
@@ -25,15 +25,25 @@ public class EpisodeEntity {
     private int numberEpisode;
     private String TvShow;
     private int time;
+    private String synopsis;
 
     public EpisodeEntity() {
     }
 
-    public EpisodeEntity(String TvShow, String name, int numberEpisode, int time) {
+    public EpisodeEntity(String TvShow, String name, int numberEpisode, int time, String synopsis) {
         this.TvShow = TvShow;
         this.name = name;
         this.numberEpisode = numberEpisode;
         this.time = time;
+        this.synopsis = synopsis;
+    }
+
+    public String getSynopsis() {
+        return synopsis;
+    }
+
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
     }
 
     public Long getId() {

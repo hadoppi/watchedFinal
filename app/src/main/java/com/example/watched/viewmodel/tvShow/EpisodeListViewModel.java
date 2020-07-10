@@ -1,4 +1,4 @@
-package com.example.watched.viewmodel.account;
+package com.example.watched.viewmodel.tvShow;
 
 import android.app.Application;
 

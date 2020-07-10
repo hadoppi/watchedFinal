@@ -37,13 +37,13 @@ public class Friends extends AppCompatActivity {
                 } else {
                     view = convertView;
                 }
-                TextView textView1 = (TextView) view.findViewById(R.id.listview_show);
+                TextView textView1 = view.findViewById(R.id.listview_show);
                 textView1.setText(friends[position]);
 
                 return view;
             }
         };
-        list = (ListView) findViewById(R.id.main_listview);
+        list = findViewById(R.id.main_listview);
         list.setAdapter(adapter);
 
         //ListeView handler

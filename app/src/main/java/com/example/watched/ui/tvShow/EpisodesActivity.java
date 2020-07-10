@@ -1,7 +1,6 @@
-package com.example.watched.ui.account;
+package com.example.watched.ui.tvShow;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,17 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.watched.R;
 import com.example.watched.adapter.RecyclerAdapter;
-import com.example.watched.database.entity.AccountEntity;
-import com.example.watched.database.entity.EpisodeEntity;
 import com.example.watched.database.entity.EpisodeEntity;
 import com.example.watched.ui.BaseActivity;
-import com.example.watched.ui.MainActivity;
-import com.example.watched.ui.account.EditEpisodeActivity;
-import com.example.watched.ui.account.EpisodeDetailActivity;
 import com.example.watched.util.OnAsyncEventListener;
 import com.example.watched.util.RecyclerViewItemClickListener;
-import com.example.watched.viewmodel.account.AccountListViewModel;
-import com.example.watched.viewmodel.account.EpisodeListViewModel;
+import com.example.watched.viewmodel.tvShow.EpisodeListViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -71,11 +64,11 @@ public class EpisodesActivity extends BaseActivity {
                 Log.d(TAG, "clicked on: " + episodes.get(position).getName());
 
                 Intent intent = new Intent(EpisodesActivity.this, EpisodeDetailActivity.class);
-//                intent.setFlags(
-//                        Intent.FLAG_ACTIVITY_NO_ANIMATION |
-//                        Intent.FLAG_ACTIVITY_NO_HISTORY
-//                );
-//                intent.putExtra("accountId", accounts.get(position).getId());
+                intent.setFlags(
+                        Intent.FLAG_ACTIVITY_NO_ANIMATION |
+                        Intent.FLAG_ACTIVITY_NO_HISTORY
+                );
+                intent.putExtra("synopsis", episodes.get(position).getSynopsis());
                 startActivity(intent);
             }
 
@@ -95,6 +88,7 @@ public class EpisodesActivity extends BaseActivity {
                             Intent.FLAG_ACTIVITY_NO_ANIMATION |
                                     Intent.FLAG_ACTIVITY_NO_HISTORY
                     );
+                    intent.putExtra("id", episodes.get(position).getId());
                     startActivity(intent);
                 }
         );

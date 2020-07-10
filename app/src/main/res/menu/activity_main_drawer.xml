@@ -3,13 +3,14 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_accounts"
+            android:id="@+id/nav_tvShow"
             android:icon="@drawable/ic_account_balance_wallet_black_24dp"
-            android:title="@string/title_activity_accounts" />
+            android:title="@string/title_activity_Episodes" />
         <item
-            android:id="@+id/nav_transaction"
-            android:icon="@drawable/ic_credit_card_black_24dp"
-            android:title="@string/title_activity_transaction" />
+        android:id="@+id/nav_episode"
+        android:icon="@drawable/ic_account_balance_wallet_black_24dp"
+        android:title="@string/title_activity_Episode" />
+
         <item
             android:id="@+id/nav_client"
             android:icon="@drawable/ic_person_black_24dp"

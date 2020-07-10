@@ -12,28 +12,22 @@ import android.util.Log;
 
 import java.util.concurrent.Executors;
 
-import com.example.watched.database.dao.AccountDao;
+import com.example.watched.database.dao.ListDao;
+import com.example.watched.database.dao.TvShowDao;
 import com.example.watched.database.dao.ClientDao;
 import com.example.watched.database.dao.EpisodeDao;
-import com.example.watched.database.entity.AccountEntity;
+import com.example.watched.database.entity.ListEntity;
+import com.example.watched.database.entity.TvShowEntity;
 import com.example.watched.database.entity.ClientEntity;
 import com.example.watched.database.entity.EpisodeEntity;
+import com.example.watched.database.repository.ListRepository;
 
-@Database(entities = {AccountEntity.class, ClientEntity.class, EpisodeEntity.class}, version = 2)
+@Database(entities = {TvShowEntity.class, ClientEntity.class, EpisodeEntity.class, ListEntity.class}, version = 5)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String TAG = "AppDatabase";
-
-    private static AppDatabase instance;
-
     private static final String DATABASE_NAME = "oppi_Database";
-
-    public abstract AccountDao accountDao();
-
-    public abstract ClientDao clientDao();
-
-    public abstract EpisodeDao episodeDao();
-
+    private static AppDatabase instance;
     private final MutableLiveData<Boolean> mIsDatabaseCreated = new MutableLiveData<>();
 
     public static AppDatabase getInstance(final Context context) {
@@ -67,7 +61,8 @@ public abstract class AppDatabase extends RoomDatabase {
                             database.setDatabaseCreated();
                         });
                     }
-                }).build();
+                })
+                .build();
     }
 
     public static void initializeDemoData(final AppDatabase database) {
@@ -77,12 +72,21 @@ public abstract class AppDatabase extends RoomDatabase {
                 database.clientDao().deleteAll();
                 database.accountDao().deleteAll();
                 database.episodeDao().deleteAll();
+                database.listDao().deleteAll();
 
 
                 DatabaseInitializer.populateDatabase(database);
             });
         });
     }
+
+    public abstract TvShowDao accountDao();
+
+    public abstract ClientDao clientDao();
+
+    public abstract EpisodeDao episodeDao();
+
+    public abstract ListDao listDao();
 
     /**
      * Check whether the database already exists and expose it via {@link #getDatabaseCreated()}
@@ -100,5 +104,6 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public LiveData<Boolean> getDatabaseCreated() {
         return mIsDatabaseCreated;
-    }
-}
+    }}
+
+

@@ -3,7 +3,7 @@ package com.example.watched;
 import android.app.Application;
 
 import com.example.watched.database.AppDatabase;
-import com.example.watched.database.repository.AccountRepository;
+import com.example.watched.database.repository.TvShowRepository;
 import com.example.watched.database.repository.ClientRepository;
 import com.example.watched.database.repository.EpisodeRepository;
 
@@ -21,11 +21,10 @@ public class BaseApp extends Application {
         return AppDatabase.getInstance(this);
     }
 
-    public AccountRepository getAccountRepository() {
+    public TvShowRepository getTvShowRepository() {
 
-        return AccountRepository.getInstance();
+        return TvShowRepository.getInstance();
     }
-
     public ClientRepository getClientRepository() {
         return ClientRepository.getInstance();
     }

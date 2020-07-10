@@ -1,29 +1,29 @@
-package com.example.watched.database.async.account;
+package com.example.watched.database.async.tvShow;
 
 import android.app.Application;
 import android.os.AsyncTask;
 
 import com.example.watched.BaseApp;
-import com.example.watched.database.entity.AccountEntity;
+import com.example.watched.database.entity.TvShowEntity;
 import com.example.watched.util.OnAsyncEventListener;
 
-public class CreateAccount extends AsyncTask<AccountEntity, Void, Void> {
+public class DeleteTvShow extends AsyncTask<TvShowEntity, Void, Void> {
 
     private Application application;
     private OnAsyncEventListener callback;
     private Exception exception;
 
-    public CreateAccount(Application application, OnAsyncEventListener callback) {
+    public DeleteTvShow(Application application, OnAsyncEventListener callback) {
         this.application = application;
         this.callback = callback;
     }
 
     @Override
-    protected Void doInBackground(AccountEntity... params) {
+    protected Void doInBackground(TvShowEntity... params) {
         try {
-            for (AccountEntity account : params)
+            for (TvShowEntity account : params)
                 ((BaseApp) application).getDatabase().accountDao()
-                        .insert(account);
+                        .delete(account);
         } catch (Exception e) {
             exception = e;
         }

@@ -6,43 +6,42 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Transaction;
 import androidx.room.Update;
 
 import java.util.List;
 
-import com.example.watched.database.entity.AccountEntity;
+import com.example.watched.database.entity.TvShowEntity;
 
 /**
  * https://developer.android.com/topic/libraries/architecture/room.html#no-object-references
  */
 @Dao
-public interface AccountDao {
+public interface TvShowDao {
 
 
 
     @Query("SELECT * FROM Show WHERE name = :name")
-    public abstract LiveData<AccountEntity> getByName(String name);
+    LiveData<TvShowEntity> getByName(String name);
 
 
-    @Query("SELECT * FROM Show")
-    public abstract LiveData<List<AccountEntity>> getAll();
+    @Query("SELECT * FROM Show ORDER BY name")
+    LiveData<List<TvShowEntity>> getAll();
 
 
     @Insert
-    public abstract long insert(AccountEntity account);
+    long insert(TvShowEntity account);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public abstract void insertAll(List<AccountEntity> accounts);
+    void insertAll(List<TvShowEntity> accounts);
 
     @Update
-    public abstract void update(AccountEntity account);
+    void update(TvShowEntity account);
 
     @Delete
-    public abstract void delete(AccountEntity account);
+    void delete(TvShowEntity account);
 
     @Query("DELETE FROM Show")
-    public abstract void deleteAll();
+    void deleteAll();
 
 
 }
