@@ -1,8 +1,10 @@
 package com.example.watched.adapter;
 
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.example.watched.R;
+import com.example.watched.database.entity.ListEntity;
 import com.example.watched.database.entity.TvShowEntity;
 import com.example.watched.database.entity.ClientEntity;
 import com.example.watched.database.entity.EpisodeEntity;
@@ -25,6 +28,7 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
     static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         TextView mTextView;
+
         ViewHolder(TextView textView) {
             super(textView);
             mTextView = textView;
@@ -58,6 +62,9 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
             holder.mTextView.setText(((ClientEntity) item).getFirstName() + " " + ((ClientEntity) item).getLastName());
         if (item.getClass().equals(EpisodeEntity.class))
             holder.mTextView.setText(((EpisodeEntity) item).getName() + " episode numéro " + ((EpisodeEntity) item).getNumberEpisode());
+        if (item.getClass().equals(ListEntity.class))
+            holder.mTextView.setText(((ListEntity) item).getName()+" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t "+((ListEntity) item).getFavoriteShows());
+
     }
 
     @Override
@@ -94,9 +101,15 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
                         return ((ClientEntity) mData.get(oldItemPosition)).getEmail().equals(
                                 ((ClientEntity) data.get(newItemPosition)).getEmail());
                     }
+                    if (mData instanceof ListEntity) {
+                        return ((ListEntity) mData.get(oldItemPosition)).getName().equals(
+                                ((ListEntity) data.get(newItemPosition)).getName());
+                    }
+
                     return false;
                 }
 
+                @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
                     if (mData instanceof TvShowEntity) {
@@ -112,6 +125,13 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
                                 && Objects.equals(newClient.getFirstName(), oldClient.getFirstName())
                                 && Objects.equals(newClient.getLastName(), oldClient.getLastName())
                                 && newClient.getPassword().equals(oldClient.getPassword());
+                    }
+                    if (mData instanceof ListEntity) {
+                        ListEntity newList = (ListEntity) data.get(newItemPosition);
+                        ListEntity oldList = (ListEntity) mData.get(newItemPosition);
+                        return newList.getName().equals(oldList.getName())
+                                && Objects.equals(newList.getName(), oldList.getName());
+
                     }
                     return false;
                 }

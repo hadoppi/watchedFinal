@@ -3,6 +3,7 @@ package com.example.watched;
 import android.app.Application;
 
 import com.example.watched.database.AppDatabase;
+import com.example.watched.database.repository.ListRepository;
 import com.example.watched.database.repository.TvShowRepository;
 import com.example.watched.database.repository.ClientRepository;
 import com.example.watched.database.repository.EpisodeRepository;
@@ -30,5 +31,8 @@ public class BaseApp extends Application {
     }
     public EpisodeRepository getEpisodeRepository() {
         return EpisodeRepository.getInstance();
+    }
+    public ListRepository getListRepository() {
+        return ListRepository.getInstance();
     }
 }

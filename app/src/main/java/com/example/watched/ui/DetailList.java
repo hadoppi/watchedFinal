@@ -3,16 +3,11 @@ package com.example.watched.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.view.GravityCompat;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -22,17 +17,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.watched.R;
 import com.example.watched.adapter.RecyclerAdapter;
 import com.example.watched.database.entity.ListEntity;
-import com.example.watched.ui.tvShow.EditAccountActivity;
-import com.example.watched.util.OnAsyncEventListener;
+import com.example.watched.ui.tvShow.EpisodesActivity;
 import com.example.watched.util.RecyclerViewItemClickListener;
 import com.example.watched.viewmodel.ListListViewModel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class MyList extends BaseActivity {
+public class DetailList extends BaseActivity {
 
     private static final String TAG = "MyList";
 
@@ -43,9 +36,9 @@ public class MyList extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getLayoutInflater().inflate(R.layout.activity_my_list, frameLayout);
-
-        setTitle(getString(R.string.title_activity_list));
+        getLayoutInflater().inflate(R.layout.activity_detail_list, frameLayout);
+        String title = getIntent().getStringExtra("listName");
+        setTitle(title);
         navigationView.setCheckedItem(position);
 
         RecyclerView recyclerView = findViewById(R.id.listRecyclerView);
@@ -57,9 +50,6 @@ public class MyList extends BaseActivity {
                 LinearLayoutManager.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
 
-        SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
-        String owner = settings.getString(BaseActivity.PREFS_USER, null);
-
         lists = new ArrayList<>();
         adapter = new RecyclerAdapter<>(new RecyclerViewItemClickListener() {
             @Override
@@ -67,9 +57,9 @@ public class MyList extends BaseActivity {
                 Log.d(TAG, "clicked position:" + position);
                 Log.d(TAG, "clicked on: " + lists.get(position));
 
-                Intent intent = new Intent(MyList.this, DetailList.class);
+                Intent intent = new Intent(DetailList.this, EpisodesActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_NO_HISTORY);
-                intent.putExtra("listName", lists.get(position).getName());
+                intent.putExtra("tvShow", lists.get(position).getFavoriteShows());
                 startActivity(intent);
             }
 
@@ -93,26 +83,13 @@ public class MyList extends BaseActivity {
 //                }
 //        );
 
-        ListListViewModel.Factory factory = new ListListViewModel.Factory(getApplication());
+        ListListViewModel.Factory factory = new ListListViewModel.Factory(getApplication(), title);
         viewModel = ViewModelProviders.of(this, factory).get(ListListViewModel.class);
-        viewModel.getList().observe(this, lists -> {
+        viewModel.getListByname().observe(this, lists -> {
 
             if (lists != null) {
                 this.lists = lists;
-                List<ListEntity> nouvelle = new ArrayList<>();
-                for (int i = 0; i < lists.size(); i++) {
-                    nouvelle.add(lists.remove(i));
-                }
-                ArrayList<String> result = new ArrayList<>();
-                HashSet<String> set = new HashSet<>();
-                for (int i = 0; i < lists.size(); i++) {
-                    if (!set.contains(nouvelle.get(i).getName())) {
-                        result.add(nouvelle.get(i).getName());
-                        set.add(nouvelle.get(i).getName());
-                    } else {
-                        lists.remove(i);
-                    }
-                }
+
                 adapter.setData(this.lists);
             }
         });

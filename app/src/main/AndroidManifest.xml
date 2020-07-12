@@ -59,6 +59,27 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.watched.ui.tvShow.EpisodesActivity" />
         </activity>
+        <!--        List activity-->
+        <activity
+            android:name=".ui.MyList"
+            android:label="@string/title_activity_list"
+            android:parentActivityName=".ui.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.watched.ui.MainActivity" />
+        </activity>
+        <!--        Detail list activity-->
+        <activity
+            android:name=".ui.DetailList"
+            android:label="@string/title_activity_list"
+            android:parentActivityName=".ui.MyList"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.watched.ui.MyList" />
+        </activity>
+
         <!--                <activity-->
         <!--                    android:name=".ui.mgmt.SettingsActivity"-->
         <!--                    android:label="@string/title_activity_settings"-->

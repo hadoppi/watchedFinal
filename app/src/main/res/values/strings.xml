@@ -100,6 +100,7 @@
     <string name="Episode">nom de l\'épisode</string>
     <string name="title_activity_Episode">Episode</string>
     <string name="title_activity_settings">settings</string>
+    <string name="title_activity_list">Mes listes</string>
 
 
 </resources>

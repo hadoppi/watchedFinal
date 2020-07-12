@@ -22,6 +22,12 @@ import java.util.List;
 @Dao
 public interface EpisodeDao {
 
+    @Query("SELECT * FROM Episodes WHERE seen = :seen")
+    LiveData<List<EpisodeEntity>> getAllSeen(boolean seen);
+
+    @Query("SELECT * FROM Episodes WHERE seen != :seen")
+    LiveData<List<EpisodeEntity>> getAllNotSeen(boolean seen);
+
     @Query("SELECT * FROM Episodes WHERE id = :id")
     LiveData<EpisodeEntity> getById(Long id);
 

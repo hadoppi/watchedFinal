@@ -1,21 +1,8 @@
 package com.example.watched.ui.tvShow;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import androidx.core.view.GravityCompat;
-import androidx.appcompat.app.AlertDialog;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -23,11 +10,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.view.GravityCompat;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.watched.R;
 import com.example.watched.adapter.RecyclerAdapter;
@@ -36,6 +25,10 @@ import com.example.watched.ui.BaseActivity;
 import com.example.watched.util.OnAsyncEventListener;
 import com.example.watched.util.RecyclerViewItemClickListener;
 import com.example.watched.viewmodel.tvShow.TvShowListViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TvShowsActivity extends BaseActivity {
 
@@ -55,8 +48,6 @@ public class TvShowsActivity extends BaseActivity {
 
         RecyclerView recyclerView = findViewById(R.id.accountsRecyclerView);
 
-
-        // use a linear layout manager
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -112,7 +103,6 @@ public class TvShowsActivity extends BaseActivity {
         });
         recyclerView.setAdapter(adapter);
     }
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

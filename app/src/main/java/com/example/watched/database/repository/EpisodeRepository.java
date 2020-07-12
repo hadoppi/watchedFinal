@@ -33,6 +33,12 @@ public class EpisodeRepository {
         return instance;
     }
 
+    public LiveData<List<EpisodeEntity>> getAllSeen (Application application){
+        return ((BaseApp) application).getDatabase().episodeDao().getAllSeen(true);
+    }
+    public LiveData<List<EpisodeEntity>> getAllNotSeen (Application application){
+        return ((BaseApp) application).getDatabase().episodeDao().getAllNotSeen(true);
+    }
     public LiveData<EpisodeEntity> getEpisode(final Long EpisodeId, Application application) {
         return ((BaseApp) application).getDatabase().episodeDao().getById(EpisodeId);
     }

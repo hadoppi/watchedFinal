@@ -26,6 +26,7 @@ public class EpisodeEntity {
     private String TvShow;
     private int time;
     private String synopsis;
+    private boolean seen;
 
     public EpisodeEntity() {
     }
@@ -36,6 +37,15 @@ public class EpisodeEntity {
         this.numberEpisode = numberEpisode;
         this.time = time;
         this.synopsis = synopsis;
+        this.seen = false;
+    }
+
+    public boolean isSeen() {
+        return seen;
+    }
+
+    public void setSeen(boolean seen) {
+        this.seen = seen;
     }
 
     public String getSynopsis() {

@@ -24,6 +24,10 @@ public class ListEntity {
         this.favoriteShows = favoriteShows;
     }
 
+    public ListEntity() {
+
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

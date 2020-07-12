@@ -22,7 +22,6 @@ public class TvShowListViewModel extends AndroidViewModel {
     private Application application;
     private TvShowRepository repository;
     private final MediatorLiveData<List<TvShowEntity>> observableShow;
-    private final MediatorLiveData<List<TvShowEntity>> observableShowId;
 
     public TvShowListViewModel(@NonNull Application application,
                                TvShowRepository accountRepository) {
@@ -32,18 +31,12 @@ public class TvShowListViewModel extends AndroidViewModel {
         this.application = application;
         repository = accountRepository;
         observableShow = new MediatorLiveData<>();
-        observableShowId = new MediatorLiveData<>();
-        // set by default null, until we get data from the database.
         observableShow.setValue(null);
-        observableShowId.setValue(null);
 
         LiveData<List<TvShowEntity>> tvShows = repository.getAccounts(applicationContext);
-//        LiveData<List<TvShowWithEpisodes>> tvshowsIDId = repository.getAccounts(applicationContext);
 
-        // observe the changes of the entities from the database and forward them
         observableShow.addSource(tvShows, observableShow::setValue);
 
-//        observableShowId.addSource(tvShowsID, observableShowId::setValue);
     }
 
     /**

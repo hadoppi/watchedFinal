@@ -21,8 +21,11 @@ public interface ListDao {
     @Query("SELECT * FROM List WHERE name = :name")
     LiveData<List<ListEntity>> getByName(String name);
 
+    @Query("SELECT DISTINCT name FROM LIST")
+    LiveData<List<String>> getAllName();
+
     @Query("SELECT * FROM List WHERE owner = :owner")
-    LiveData<ListEntity> getByOwner(String owner);
+    LiveData<List<ListEntity>> getByOwner(String owner);
 
     @Query("SELECT * FROM List")
     LiveData<List<ListEntity>> getAll();

@@ -37,11 +37,14 @@ public class ListRepository {
         return instance;
     }
 
-    public LiveData<List<ListEntity>> getByName(final String name, Application application) {
+    public LiveData<List<ListEntity>> getByName(final String name, Context application) {
         return ((BaseApp) application).getDatabase().listDao().getByName(name);
     }
-    public LiveData<List<ListEntity>> getByOwner(final String owner, Application application) {
-        return ((BaseApp) application).getDatabase().listDao().getByName(owner);
+    public LiveData<List<String>> getAllName( Context application) {
+        return ((BaseApp) application).getDatabase().listDao().getAllName();
+    }
+    public LiveData<List<ListEntity>> getByOwner(final String owner, Context application) {
+        return ((BaseApp) application).getDatabase().listDao().getByOwner(owner);
     }
     public LiveData<List<ListEntity>> getAll(Application application) {
         return ((BaseApp) application).getDatabase().listDao().getAll();

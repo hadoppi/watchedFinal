@@ -20,9 +20,8 @@ import com.example.watched.database.entity.ListEntity;
 import com.example.watched.database.entity.TvShowEntity;
 import com.example.watched.database.entity.ClientEntity;
 import com.example.watched.database.entity.EpisodeEntity;
-import com.example.watched.database.repository.ListRepository;
 
-@Database(entities = {TvShowEntity.class, ClientEntity.class, EpisodeEntity.class, ListEntity.class}, version = 5)
+@Database(entities = {TvShowEntity.class, ClientEntity.class, EpisodeEntity.class, ListEntity.class}, version = 6)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String TAG = "AppDatabase";
