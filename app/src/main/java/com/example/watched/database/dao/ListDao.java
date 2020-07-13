@@ -39,8 +39,11 @@ public interface ListDao {
     @Update
     void update(ListEntity list);
 
-    @Delete
-    void delete(ListEntity list);
+    @Query("DELETE FROM List where name =:name")
+    void deleteAllList(String name);
+
+    @Query("DELETE FROM List where favoriteShows = :favShow AND name= :name")
+    void delete(String name, String favShow);
 
     @Query("DELETE FROM List")
     void deleteAll();

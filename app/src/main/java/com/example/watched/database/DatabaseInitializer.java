@@ -170,7 +170,7 @@ public class DatabaseInitializer {
         addAccount(db, "	Breaking Bad	");
         addAccount(db, "	The Twilight Zone	");
         addAccount(db, "	The Sopranos	");
-        addAccount(db, "	The Wire");
+        addAccount(db, "The Wire");
 
         try {
             // Let's ensure that the tvshows are already stored in the database before we continue.

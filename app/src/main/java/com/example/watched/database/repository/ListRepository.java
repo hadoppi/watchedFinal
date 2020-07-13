@@ -60,10 +60,13 @@ public class ListRepository {
         new UpdateList(application, callback).execute(list);
     }
 
-    public void delete(final ListEntity list, OnAsyncEventListener callback,
+    public void deleteList(final ListEntity list, OnAsyncEventListener callback,
                        Application application) {
-        new DeleteList(application, callback).execute(list);
+        new DeleteList(list.getName(), application, callback).execute(list);
     }
 
 
+    public void deleteShowFromList(ListEntity list, OnAsyncEventListener callback, Application application) {
+        new DeleteList(list.getName(), list.getFavoriteShows(), application, callback).execute(list);
+    }
 }

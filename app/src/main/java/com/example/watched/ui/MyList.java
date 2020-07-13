@@ -78,7 +78,7 @@ public class MyList extends BaseActivity {
                 Log.d(TAG, "longClicked position:" + position);
                 Log.d(TAG, "longClicked on: " + lists.get(position));
 
-//                createDeleteDialog(position);
+                createDeleteDialog(position);
             }
         });
 
@@ -117,7 +117,9 @@ public class MyList extends BaseActivity {
             }
         });
         recyclerView.setAdapter(adapter);
+
     }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -132,35 +134,36 @@ public class MyList extends BaseActivity {
         return super.onNavigationItemSelected(item);
     }
 
-//    private void createDeleteDialog(final int position) {
-//        final String list = lists.get(position);
-//        LayoutInflater inflater = LayoutInflater.from(this);
-//        final View view = inflater.inflate(R.layout.row_delete_item, null);
-//        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-//        alertDialog.setTitle(getString(R.string.title_activity_delete_account));
-//        alertDialog.setCancelable(false);
-//
-//        final TextView deleteMessage = view.findViewById(R.id.tv_delete_item);
-//        deleteMessage.setText(String.format(getString(R.string.account_delete_msg), list));
-//
-//        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.action_accept), (dialog, which) -> {
-//            Toast toast = Toast.makeText(this, getString(R.string.account_deleted), Toast.LENGTH_LONG);
-//            viewModel.deleteAccount(list, new OnAsyncEventListener() {
-//                @Override
-//                public void onSuccess() {
-//                    Log.d(TAG, "deleteAccount: success");
-//                }
-//
-//                @Override
-//                public void onFailure(Exception e) {
-//                    Log.d(TAG, "deleteAccount: failure", e);
-//                }
-//            });
-//            toast.show();
-//        });
-//
-//        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.action_cancel), (dialog, which) -> alertDialog.dismiss());
-//        alertDialog.setView(view);
-//        alertDialog.show();
-//    }
+    private void createDeleteDialog(final int position) {
+        final ListEntity list = lists.get(position);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        final View view = inflater.inflate(R.layout.row_delete_item, null);
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(getString(R.string.title_activity_delete_account));
+        alertDialog.setCancelable(false);
+
+        final TextView deleteMessage = view.findViewById(R.id.tv_delete_item);
+        deleteMessage.setText(String.format(getString(R.string.account_delete_msg), list));
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.action_accept), (dialog, which) -> {
+            Toast toast = Toast.makeText(this, getString(R.string.account_deleted), Toast.LENGTH_LONG);
+            viewModel.deleteList(list, new OnAsyncEventListener() {
+                @Override
+                public void onSuccess() {
+                    Log.d(TAG, "deleteList: success");
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    Log.d(TAG, "deleteList: failure", e);
+                }
+            });
+            toast.show();
+        });
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.action_cancel), (dialog, which) -> alertDialog.dismiss());
+        alertDialog.setView(view);
+        alertDialog.show();
+    }
 }
+

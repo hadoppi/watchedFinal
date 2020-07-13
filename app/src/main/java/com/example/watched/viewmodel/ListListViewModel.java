@@ -28,7 +28,7 @@ public class ListListViewModel extends AndroidViewModel {
     private LiveData<List<ListEntity>> listsByName;
 
 
-    public ListListViewModel(@NonNull Application application,String name,
+    public ListListViewModel(@NonNull Application application, String name,
                              ListRepository listRepository) {
         super(application);
 
@@ -49,8 +49,6 @@ public class ListListViewModel extends AndroidViewModel {
     }
 
 
-
-
     /**
      * A creator is used to inject the account id into the ViewModel
      */
@@ -61,11 +59,12 @@ public class ListListViewModel extends AndroidViewModel {
         private final ListRepository listRepository;
         private String name;
 
-        public Factory(@NonNull Application application){
+        public Factory(@NonNull Application application) {
             this.application = application;
             listRepository = ((BaseApp) application).getListRepository();
         }
-        public Factory(@NonNull Application application, String name){
+
+        public Factory(@NonNull Application application, String name) {
             this.application = application;
             this.name = name;
             listRepository = ((BaseApp) application).getListRepository();
@@ -86,13 +85,18 @@ public class ListListViewModel extends AndroidViewModel {
     public LiveData<List<ListEntity>> getList() {
         return observableList;
     }
+
     public LiveData<List<ListEntity>> getListByname() {
         return observableListByName;
     }
 
-//    public void deleteAccount(String list, OnAsyncEventListener callback) {
-//        repository.delete(list, callback, application);
+    public void deleteList(ListEntity list, OnAsyncEventListener callback) {
+        repository.deleteList(list, callback, application);
     }
+    public void deleteShowFromList(ListEntity list, OnAsyncEventListener callback) {
+        repository.deleteShowFromList(list, callback, application);
+    }
+}
 
 
 

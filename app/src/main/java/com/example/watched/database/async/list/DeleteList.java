@@ -12,18 +12,33 @@ public class DeleteList extends AsyncTask<ListEntity, Void, Void> {
     private Application application;
     private OnAsyncEventListener callback;
     private Exception exception;
+    private String name;
+    private String favShow;
 
-    public DeleteList(Application application, OnAsyncEventListener callback) {
+    public DeleteList(String name, Application application, OnAsyncEventListener callback) {
         this.application = application;
         this.callback = callback;
+        this.name = name;
+        this.favShow = "deleteAllList";
+    }
+
+    public DeleteList(String name, String favShow, Application application, OnAsyncEventListener callback) {
+        this.application = application;
+        this.callback = callback;
+        this.name = name;
+        this.favShow = favShow;
     }
 
     @Override
     protected Void doInBackground(ListEntity... params) {
         try {
             for (ListEntity list : params)
-                ((BaseApp) application).getDatabase().listDao()
-                        .delete(list);
+                if (this.favShow.equals("deleteAllList"))
+                    ((BaseApp) application).getDatabase().listDao()
+                            .deleteAllList(name);
+                else ((BaseApp) application).getDatabase().listDao()
+                        .delete(name, favShow);
+
         } catch (Exception e) {
             exception = e;
         }
