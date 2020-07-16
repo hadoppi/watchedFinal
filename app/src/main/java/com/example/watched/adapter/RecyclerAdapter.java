@@ -61,7 +61,7 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
         if (item.getClass().equals(ClientEntity.class))
             holder.mTextView.setText(((ClientEntity) item).getFirstName() + " " + ((ClientEntity) item).getLastName());
         if (item.getClass().equals(EpisodeEntity.class))
-            holder.mTextView.setText(((EpisodeEntity) item).getName() + " episode numéro " + ((EpisodeEntity) item).getNumberEpisode());
+            holder.mTextView.setText(((EpisodeEntity) item).getName());
         if (item.getClass().equals(ListEntity.class))
             holder.mTextView.setText(((ListEntity) item).getName()+" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t "+((ListEntity) item).getFavoriteShows());
 

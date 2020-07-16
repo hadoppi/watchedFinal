@@ -16,10 +16,7 @@ import android.widget.FrameLayout;
 
 import com.example.watched.R;
 import com.example.watched.ui.tvShow.TvShowsActivity;
-import com.example.watched.ui.client.ClientActivity;
 import com.example.watched.ui.mgmt.LoginActivity;
-
-import java.util.Objects;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -40,6 +37,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
      */
     protected static int position;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +56,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView = findViewById(R.id.base_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
     }
 
     @Override
@@ -82,18 +82,16 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        if (item.getItemId() == R.id.action_settings) {
-//            Intent intent = new Intent(this, SettingsActivity.class);
-//            startActivity(intent);
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.action_settings) {
+            Intent intent = new Intent(this, Settings.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -110,9 +108,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setCheckedItem(id);
 
         if (id == R.id.nav_client) {
-            intent = new Intent(this, ClientActivity.class);
+            intent = new Intent(this, Settings.class);
         } else if (id == R.id.nav_tvShow) {
             intent = new Intent(this, TvShowsActivity.class);
+        }else if (id == R.id.nav_list) {
+                intent = new Intent(this, MyList.class);
         } else if (id == R.id.nav_logout) {
             logout();
         }

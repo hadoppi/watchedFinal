@@ -35,7 +35,7 @@ public class EpisodeDetailActivity extends BaseActivity {
 
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(view -> {
-                    Intent intent = new Intent(EpisodeDetailActivity.this, EditAccountActivity.class);
+                    Intent intent = new Intent(EpisodeDetailActivity.this, EditShowActivity.class);
                     intent.setFlags(
                             Intent.FLAG_ACTIVITY_NO_ANIMATION |
                                     Intent.FLAG_ACTIVITY_NO_HISTORY
@@ -57,6 +57,9 @@ public class EpisodeDetailActivity extends BaseActivity {
         String synopsis = getIntent().getStringExtra("synopsis");
         TextView textView = findViewById(R.id.synopsis);
         textView.setText(synopsis);
+        String title = getIntent().getStringExtra("title");
+        TextView textView2 = findViewById(R.id.textView2);
+        textView2.setText(title);
 
 
     }
@@ -119,5 +122,14 @@ public class EpisodeDetailActivity extends BaseActivity {
 //        alertDialog.setView(view);
 //        alertDialog.show();
 //    }
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return;
+        }
+        super.onBackPressed();
+        startActivity(new Intent(this, EpisodesActivity.class));
+    }
 
 }

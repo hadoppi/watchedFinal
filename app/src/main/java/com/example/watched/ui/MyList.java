@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.watched.R;
 import com.example.watched.adapter.RecyclerAdapter;
 import com.example.watched.database.entity.ListEntity;
-import com.example.watched.ui.tvShow.EditAccountActivity;
 import com.example.watched.util.OnAsyncEventListener;
 import com.example.watched.util.RecyclerViewItemClickListener;
 import com.example.watched.viewmodel.ListListViewModel;
@@ -82,16 +81,17 @@ public class MyList extends BaseActivity {
             }
         });
 
-//        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
-//        fab.setOnClickListener(view -> {
-//                    Intent intent = new Intent(MyList.this, EditAccountActivity.class);
-//                    intent.setFlags(
-//                            Intent.FLAG_ACTIVITY_NO_ANIMATION |
-//                                    Intent.FLAG_ACTIVITY_NO_HISTORY
-//                    );
-//                    startActivity(intent);
-//                }
-//        );
+        FloatingActionButton fab;
+        fab = findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(view -> {
+                    Intent intent = new Intent(MyList.this, EditListActivity.class);
+                    intent.setFlags(
+                            Intent.FLAG_ACTIVITY_NO_ANIMATION |
+                                    Intent.FLAG_ACTIVITY_NO_HISTORY
+                    );
+                    startActivity(intent);
+                }
+        );
 
         ListListViewModel.Factory factory = new ListListViewModel.Factory(getApplication());
         viewModel = ViewModelProviders.of(this, factory).get(ListListViewModel.class);
@@ -164,6 +164,15 @@ public class MyList extends BaseActivity {
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.action_cancel), (dialog, which) -> alertDialog.dismiss());
         alertDialog.setView(view);
         alertDialog.show();
+    }
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return;
+        }
+        super.onBackPressed();
+        startActivity(new Intent(this, MainActivity.class));
     }
 }
 

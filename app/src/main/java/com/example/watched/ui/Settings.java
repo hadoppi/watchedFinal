@@ -1,4 +1,4 @@
-package com.example.watched.ui.client;
+package com.example.watched.ui;
 
 import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -21,7 +21,7 @@ import com.example.watched.ui.MainActivity;
 import com.example.watched.util.OnAsyncEventListener;
 import com.example.watched.viewmodel.client.ClientViewModel;
 
-public class ClientActivity extends BaseActivity {
+public class Settings extends BaseActivity {
 
     private static final int EDIT_CLIENT = 1;
     private static final int DELETE_CLIENT = 2;

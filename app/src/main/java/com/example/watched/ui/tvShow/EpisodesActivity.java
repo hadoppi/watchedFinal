@@ -68,6 +68,7 @@ public class EpisodesActivity extends BaseActivity {
                         Intent.FLAG_ACTIVITY_NO_ANIMATION |
                         Intent.FLAG_ACTIVITY_NO_HISTORY
                 );
+                intent.putExtra("title", episodes.get(position).getName());
                 intent.putExtra("synopsis", episodes.get(position).getSynopsis());
                 startActivity(intent);
             }
@@ -83,13 +84,13 @@ public class EpisodesActivity extends BaseActivity {
 
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(view -> {
-                    Intent intent = new Intent(EpisodesActivity.this, EditAccountActivity.class);
+                    Intent intent = new Intent(EpisodesActivity.this, EditEpisodeActivity.class);
                     intent.setFlags(
                             Intent.FLAG_ACTIVITY_NO_ANIMATION |
                                     Intent.FLAG_ACTIVITY_NO_HISTORY
                     );
-                    intent.putExtra("id", episodes.get(position).getId());
-                    startActivity(intent);
+            intent.putExtra("tvShow", getIntent().getStringExtra("tvShow"));
+            startActivity(intent);
                 }
         );
         String name = getIntent().getStringExtra("tvShow");
@@ -149,5 +150,14 @@ public class EpisodesActivity extends BaseActivity {
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.action_cancel), (dialog, which) -> alertDialog.dismiss());
         alertDialog.setView(view);
         alertDialog.show();
+    }
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return;
+        }
+        super.onBackPressed();
+        startActivity(new Intent(this, TvShowsActivity.class));
     }
 }

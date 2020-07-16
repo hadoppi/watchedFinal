@@ -37,7 +37,7 @@ public class ListRepository {
         return instance;
     }
 
-    public LiveData<List<ListEntity>> getByName(final String name, Context application) {
+    public LiveData<ListEntity> getByName(final String name, Context application) {
         return ((BaseApp) application).getDatabase().listDao().getByName(name);
     }
     public LiveData<List<String>> getAllName( Context application) {

@@ -15,8 +15,6 @@ import com.example.watched.ui.tvShow.TvShowsActivity;
 
 public class MainActivity extends BaseActivity {
     Button buttonDiscover;
-    Button buttonMessages;
-    Button buttonFriends;
     Button buttonTimer;
     Button buttonMyList;
     Button buttonConfiguration;
@@ -25,13 +23,11 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-
         ActionBar actionBAr = getSupportActionBar();
         actionBAr.setTitle(" WATCHED by Oppikofer ");
 
         SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
         String user = settings.getString(BaseActivity.PREFS_USER, null);
-
 
         buttonDiscover = findViewById(R.id.circle_button2);
         buttonDiscover.setOnClickListener(new View.OnClickListener() {
@@ -47,13 +43,7 @@ public class MainActivity extends BaseActivity {
                 openConfiguration();
             }
         });
-        buttonMessages = findViewById(R.id.circle_button6);
-        buttonMessages.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openMessages();
-            }
-        });
+
         buttonMyList = findViewById(R.id.circle_button);
         buttonMyList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,45 +51,24 @@ public class MainActivity extends BaseActivity {
                 openMyList();
             }
         });
-        buttonFriends = findViewById(R.id.circle_button7);
-        buttonFriends.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openFriends();
-            }
-        });
-        buttonTimer = findViewById(R.id.circle_button4);
-        buttonTimer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openTimer();
-            }
-        });
+
 
     }
     public void openDiscover(){
         Intent intent = new Intent(this, TvShowsActivity.class);
         startActivity(intent);
+        this.finish();
     }
-    public void openMessages(){
-        Intent intent = new Intent(this, Messages.class);
-        startActivity(intent);
-    }
-    public void openFriends(){
-        Intent intent = new Intent(this, Friends.class);
-        startActivity(intent);
-    }
-    public void openTimer(){
-        Intent intent = new Intent(this, Timer.class);
-        startActivity(intent);
-    }
+
     public void openMyList(){
         Intent intent = new Intent(this, MyList.class);
         startActivity(intent);
+        this.finish();
     }
     public void openConfiguration(){
-        Intent intent = new Intent(this, Configuration.class);
+        Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
+        this.finish();
     }
 
 
@@ -110,7 +79,11 @@ public class MainActivity extends BaseActivity {
         setTitle(getString(R.string.app_name));
         navigationView.setCheckedItem(R.id.nav_none);
     }
+    @Override
+    protected void onStop() {
+        super.onStop();
 
+    }
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {

@@ -35,26 +35,6 @@
         app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <Button
-        android:id="@+id/circle_button4"
-        android:layout_width="112dp"
-        android:layout_height="108dp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/test"
-        android:text="@string/Timer"
-        app:layout_constraintStart_toStartOf="@+id/circle_button2"
-        app:layout_constraintTop_toBottomOf="@+id/circle_button6" />
-
-    <Button
-        android:id="@+id/circle_button6"
-        android:layout_width="112dp"
-        android:layout_height="108dp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/shape_drawable"
-        android:text="@string/Messages"
-        app:layout_constraintStart_toStartOf="@+id/circle_button2"
-        app:layout_constraintTop_toBottomOf="@+id/circle_button2" />
-
-    <Button
         android:id="@+id/circle_button"
         android:layout_width="112dp"
         android:layout_height="108dp"
@@ -68,20 +48,11 @@
         android:id="@+id/circle_button5"
         android:layout_width="112dp"
         android:layout_height="108dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/shape_drawable"
         android:text="@string/Configuration"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/username"
-        app:layout_constraintTop_toBottomOf="@+id/circle_button7" />
-
-    <Button
-        android:id="@+id/circle_button7"
-        android:layout_width="112dp"
-        android:layout_height="108dp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/shape_drawable"
-        android:text="@string/Friends"
-        app:layout_constraintEnd_toEndOf="@+id/username"
-        app:layout_constraintTop_toBottomOf="@+id/circle_button" />
+        app:layout_constraintStart_toStartOf="@+id/username" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

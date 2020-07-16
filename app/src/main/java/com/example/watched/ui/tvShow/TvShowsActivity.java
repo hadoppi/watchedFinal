@@ -22,6 +22,7 @@ import com.example.watched.R;
 import com.example.watched.adapter.RecyclerAdapter;
 import com.example.watched.database.entity.TvShowEntity;
 import com.example.watched.ui.BaseActivity;
+import com.example.watched.ui.MainActivity;
 import com.example.watched.util.OnAsyncEventListener;
 import com.example.watched.util.RecyclerViewItemClickListener;
 import com.example.watched.viewmodel.tvShow.TvShowListViewModel;
@@ -68,6 +69,7 @@ public class TvShowsActivity extends BaseActivity {
                 Intent intent = new Intent(TvShowsActivity.this, EpisodesActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 intent.putExtra("tvShow", tvShows.get(position).getName());
+
                 startActivity(intent);
             }
 
@@ -82,7 +84,7 @@ public class TvShowsActivity extends BaseActivity {
 
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(view -> {
-                    Intent intent = new Intent(TvShowsActivity.this, EditAccountActivity.class);
+                    Intent intent = new Intent(TvShowsActivity.this, EditShowActivity.class);
                     intent.setFlags(
                             Intent.FLAG_ACTIVITY_NO_ANIMATION |
                                     Intent.FLAG_ACTIVITY_NO_HISTORY
@@ -110,9 +112,7 @@ public class TvShowsActivity extends BaseActivity {
             drawerLayout.closeDrawer(GravityCompat.START);
             return false;
         }
-        /*
-        The activity has to be finished manually in order to guarantee the navigation hierarchy working.
-        */
+
         finish();
         return super.onNavigationItemSelected(item);
     }
@@ -147,5 +147,14 @@ public class TvShowsActivity extends BaseActivity {
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.action_cancel), (dialog, which) -> alertDialog.dismiss());
         alertDialog.setView(view);
         alertDialog.show();
+    }
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return;
+        }
+        super.onBackPressed();
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

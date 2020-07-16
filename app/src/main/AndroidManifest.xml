@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.watched">
 
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <application
         android:name=".BaseApp"
         android:allowBackup="true"
@@ -59,6 +60,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.watched.ui.tvShow.EpisodesActivity" />
         </activity>
+        <!--        episode edit activity-->
+        <activity
+            android:name=".ui.tvShow.EditEpisodeActivity"
+            android:parentActivityName=".ui.tvShow.EpisodesActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.watched.ui.tvShow.EpisodesActivity" />
+        </activity>
         <!--        List activity-->
         <activity
             android:name=".ui.MyList"
@@ -72,6 +82,16 @@
         <!--        Detail list activity-->
         <activity
             android:name=".ui.DetailList"
+            android:label="@string/title_activity_list"
+            android:parentActivityName=".ui.MyList"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.watched.ui.MyList" />
+        </activity>
+        <!--        Detail list activity-->
+        <activity
+            android:name=".ui.EditListActivity"
             android:label="@string/title_activity_list"
             android:parentActivityName=".ui.MyList"
             android:theme="@style/AppTheme.NoActionBar">
@@ -97,7 +117,7 @@
                 android:value="com.example.watched.ui.mgmt.LoginActivity" />
         </activity>
         <activity
-            android:name=".ui.client.ClientActivity"
+            android:name=".ui.Settings"
             android:label="@string/title_activity_client"
             android:parentActivityName=".ui.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -108,7 +128,7 @@
 
 
         <activity
-            android:name=".ui.tvShow.EditAccountActivity"
+            android:name=".ui.tvShow.EditShowActivity"
             android:label="@string/title_activity_edit_account"
             android:parentActivityName=".ui.tvShow.TvShowsActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -116,6 +136,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.watched.ui.tvShow.TvShowsActivity" />
         </activity>
+
         <activity android:name=".ui.mgmt.SettingsActivity" />
 
 

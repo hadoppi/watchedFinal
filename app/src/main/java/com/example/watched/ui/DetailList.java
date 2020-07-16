@@ -65,6 +65,7 @@ public class DetailList extends BaseActivity {
                 Intent intent = new Intent(DetailList.this, EpisodesActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 intent.putExtra("tvShow", lists.get(position).getFavoriteShows());
+                DetailList.this.finish();
                 startActivity(intent);
             }
 
@@ -90,7 +91,7 @@ public class DetailList extends BaseActivity {
 
         ListListViewModel.Factory factory = new ListListViewModel.Factory(getApplication(), title);
         viewModel = ViewModelProviders.of(this, factory).get(ListListViewModel.class);
-        viewModel.getListByname().observe(this, lists -> {
+        viewModel.getList().observe(this, lists -> {
 
             if (lists != null) {
                 this.lists = lists;
@@ -144,6 +145,15 @@ public class DetailList extends BaseActivity {
         alertDialog.setButton(androidx.appcompat.app.AlertDialog.BUTTON_NEGATIVE, getString(R.string.action_cancel), (dialog, which) -> alertDialog.dismiss());
         alertDialog.setView(view);
         alertDialog.show();
+    }
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return;
+        }
+        super.onBackPressed();
+        startActivity(new Intent(this, MyList.class));
     }
 
 }

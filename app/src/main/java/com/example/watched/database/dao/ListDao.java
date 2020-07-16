@@ -19,7 +19,7 @@ import java.util.List;
 public interface ListDao {
 
     @Query("SELECT * FROM List WHERE name = :name")
-    LiveData<List<ListEntity>> getByName(String name);
+    LiveData<ListEntity> getByName(String name);
 
     @Query("SELECT DISTINCT name FROM LIST")
     LiveData<List<String>> getAllName();

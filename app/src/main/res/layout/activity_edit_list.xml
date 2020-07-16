@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
     android:layout_marginTop="16dp"
+    android:layout_marginRight="16dp"
     android:orientation="vertical"
     tools:context="com.example.watched.ui.tvShow.EditShowActivity">
 
@@ -14,18 +15,33 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/accountName"
+            android:id="@+id/listName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/prompt_account_name"
+            android:hint="@string/prompt_list_name"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/showName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/prompt_first_show"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/createAccountButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/action_create" />
+
 
 </LinearLayout>

@@ -23,9 +23,9 @@ public class ListListViewModel extends AndroidViewModel {
     private Application application;
     private ListRepository repository;
     private MediatorLiveData<List<ListEntity>> observableList;
-    private MediatorLiveData<List<ListEntity>> observableListByName;
+    private MediatorLiveData<ListEntity> observableListByName;
     private LiveData<List<ListEntity>> lists;
-    private LiveData<List<ListEntity>> listsByName;
+    private LiveData<ListEntity> listsByName;
 
 
     public ListListViewModel(@NonNull Application application, String name,
@@ -86,7 +86,7 @@ public class ListListViewModel extends AndroidViewModel {
         return observableList;
     }
 
-    public LiveData<List<ListEntity>> getListByname() {
+    public LiveData<ListEntity> getListByname() {
         return observableListByName;
     }
 
@@ -95,6 +95,12 @@ public class ListListViewModel extends AndroidViewModel {
     }
     public void deleteShowFromList(ListEntity list, OnAsyncEventListener callback) {
         repository.deleteShowFromList(list, callback, application);
+    }
+    public void createList(ListEntity list, OnAsyncEventListener callback) {
+        repository.insert(list, callback, application);
+    }
+    public void update(ListEntity list, OnAsyncEventListener callback) {
+        repository.update(list, callback, application);
     }
 }
 

@@ -14,11 +14,11 @@ import com.example.watched.ui.BaseActivity;
 import com.example.watched.util.OnAsyncEventListener;
 import com.example.watched.viewmodel.tvShow.TvShowViewModel;
 
-public class EditAccountActivity extends BaseActivity {
+public class EditShowActivity extends BaseActivity {
 
-    private static final String TAG = "EditAccountActivity";
+    private static final String TAG = "EditSchowActivity";
 
-    private TvShowEntity account;
+    private TvShowEntity show;
     private String owner;
     private boolean isEditMode;
     private Toast toast;
@@ -64,18 +64,18 @@ public class EditAccountActivity extends BaseActivity {
         if (isEditMode) {
             viewModel.getTvShow().observe(this, accountEntity -> {
                 if (accountEntity != null) {
-                    account = accountEntity;
-                    etAccountName.setText(account.getName());
+                    show = accountEntity;
+                    etAccountName.setText(show.getName());
                 }
             });
         }
     }
 
-    private void saveChanges(String accountName) {
+    private void saveChanges(String showName) {
         if (isEditMode) {
-            if(!"".equals(accountName)) {
-                account.setName(accountName);
-                viewModel.updateTvShow(account, new OnAsyncEventListener() {
+            if(!"".equals(showName)) {
+                show.setName(showName);
+                viewModel.updateTvShow(show, new OnAsyncEventListener() {
                     @Override
                     public void onSuccess() {
                         Log.d(TAG, "updateAccount: success");
@@ -88,18 +88,18 @@ public class EditAccountActivity extends BaseActivity {
                 });
             }
         } else {
-            TvShowEntity newAccount = new TvShowEntity();
+            TvShowEntity newShow = new TvShowEntity();
 
-            newAccount.setName(accountName);
-            viewModel.createTvShow(newAccount, new OnAsyncEventListener() {
+            newShow.setName(showName);
+            viewModel.createTvShow(newShow, new OnAsyncEventListener() {
                 @Override
                 public void onSuccess() {
-                    Log.d(TAG, "createAccount: success");
+                    Log.d(TAG, "createShow: success");
                 }
 
                 @Override
                 public void onFailure(Exception e) {
-                    Log.d(TAG, "createAccount: failure", e);
+                    Log.d(TAG, "createShow: failure", e);
                 }
             });
         }

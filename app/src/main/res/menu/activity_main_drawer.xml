@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_tvShow"
-            android:icon="@drawable/ic_account_balance_wallet_black_24dp"
+            android:icon="@drawable/ic_serie"
             android:title="@string/title_activity_Episodes" />
         <item
         android:id="@+id/nav_episode"
@@ -15,6 +15,10 @@
             android:id="@+id/nav_client"
             android:icon="@drawable/ic_person_black_24dp"
             android:title="@string/title_activity_client"/>
+        <item
+            android:id="@+id/nav_list"
+            android:icon="@drawable/ic_fav"
+            android:title="@string/title_activi_list"/>
 
         <item
             android:id="@+id/nav_logout"
